@@ -75,32 +75,32 @@
         }
 
         numberList.Sort();
-        bool isValid = IsValid(numberList);
+        int result = LongestSubsequence(numberList);
+        Console.WriteLine($"máximum posible length of a valid subsequence is {result}.");
+    }
+    public static int LongestSubsequence(List<int> arr)
+    {
+        int n = arr.Count;
+        int maxLength = 0;
 
-        if (isValid)
+        for (int i = 0; i < n; i++)
         {
-            Console.WriteLine(
-                $"máximum posible length of a valid subsequence is {numberList.Count}."
-            );
-        }
-        else
-        {
-            List<int> newList = new();
-            newList.AddRange(numberList);
-            for (int i = 0; i < numberList.Count; i++)
+            for (int j = i + 1; j <= n; j++)
             {
-                newList.AddRange(numberList);
-                isValid = IsValid(newList);
-                if (isValid)
+                List<int> subsequence = arr.Skip(i).Take(j - i).ToList();
+
+                bool sum = IsValid(subsequence);
+
+                if (sum)
                 {
-                    Console.WriteLine(
-                        $"máximum posible length of a valid subsequence is {newList.Count}."
-                    );
+                    int length = subsequence.Count;
+                    maxLength = Math.Max(maxLength, length);
                 }
             }
         }
-    }
 
+        return maxLength;
+    }
     public static bool IsValid(List<int> values)
     {
         int sumOfDiff = 0;
