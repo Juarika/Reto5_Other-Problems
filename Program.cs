@@ -57,7 +57,9 @@
             day++;
         }
 
-        Console.WriteLine(day);
+        Console.WriteLine(
+            $"Sam is {difference} problems ahead of Kelly and they solve {samDaily} and {kellyDaily} problems a day. \nAnd Kelly will pass Sam on day {day}."
+        );
     }
 
     public static void Subsequences()
@@ -77,18 +79,23 @@
 
         if (isValid)
         {
-            Console.WriteLine(numberList.Count);
+            Console.WriteLine(
+                $"máximum posible length of a valid subsequence is {numberList.Count}."
+            );
         }
         else
         {
-            for(int i = 0; i < numberList.Count; i++)
+            List<int> newList = new();
+            newList.AddRange(numberList);
+            for (int i = 0; i < numberList.Count; i++)
             {
-                List<int> newList = new();
                 newList.AddRange(numberList);
                 isValid = IsValid(newList);
                 if (isValid)
                 {
-                    Console.WriteLine(newList.Count);
+                    Console.WriteLine(
+                        $"máximum posible length of a valid subsequence is {newList.Count}."
+                    );
                 }
             }
         }
